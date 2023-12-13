@@ -51,3 +51,5 @@ to verify tests are working on each page of the schedule uncomment line 47-48 of
 Node.js, Jest, Puppeteer, Twilio, and node-notifier
 
 ## Thanks for checking out my repo 
+
+don't mind very few commits... I may or may not have leaked my password before putting it in the .env file, so I removed the commit history to make sure it was more secure. (York doesn't let you update your password)
