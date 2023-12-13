@@ -26,10 +26,7 @@ function runner() {
     if (stderr) {
       const result = stderr.slice(0, 4);
       console.log(getTime(), result);
-      if (result !== "PASS") {
-        console.log("WE HAD A FAILURE");
-        notify(stderr);
-      }
+      // console.log(getHour())
       return;
     }
     console.log(`stdout: ${stdout}`);
@@ -52,6 +49,20 @@ function getTime() {
   // console.log("Current Time as a string:", currentTimeString);
   // console.log("Current Time in HH:MM:SS format:", hours + ":" + minutes + ":" + seconds);
   return timeString;
+}
+
+function getHour(){
+  const currentDate = new Date();
+  const currentTimeInMillis = currentDate.getTime();
+  const currentTimeString = currentDate.toTimeString();
+
+  // Get the current time in hours, minutes, and seconds
+  const hours = currentDate.getHours();
+  // const minutes = currentDate.getMinutes();
+  // const seconds = currentDate.getSeconds();
+  //removed seconds :${seconds}
+  // const timeString = `${hours}:${minutes}`;
+  return hours;
 }
 
 function notify() {
