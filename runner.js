@@ -6,8 +6,8 @@ const { exec } = require("child_process");
 // ctrl + c
 
 // Set interval to 1 minutes (600,000 milliseconds)
-const minutes = 1;
-const seconds = 60; //60 default for 1 min
+const minutes = 1; //test every how many minutes
+const seconds = 60; //60 means every minute (make this less for testing)
 const interval = minutes * seconds * 1000;
 // Execute the function initially and then at regular intervals
 console.log("Runner has begun and will execute every 60 seconds.");
@@ -34,35 +34,11 @@ function runner() {
 }
 function getTime() {
   const currentDate = new Date();
-  const currentTimeInMillis = currentDate.getTime();
-  const currentTimeString = currentDate.toTimeString();
-
   // Get the current time in hours, minutes, and seconds
   const hours = currentDate.getHours();
   const minutes = currentDate.getMinutes();
-  const seconds = currentDate.getSeconds();
-  //removed seconds :${seconds}
   const timeString = `${hours}:${minutes}`;
-
-  // console.log("Current Date and Time:", currentDate);
-  // console.log("Current Time in milliseconds:", currentTimeInMillis);
-  // console.log("Current Time as a string:", currentTimeString);
-  // console.log("Current Time in HH:MM:SS format:", hours + ":" + minutes + ":" + seconds);
   return timeString;
-}
-
-function getHour(){
-  const currentDate = new Date();
-  const currentTimeInMillis = currentDate.getTime();
-  const currentTimeString = currentDate.toTimeString();
-
-  // Get the current time in hours, minutes, and seconds
-  const hours = currentDate.getHours();
-  // const minutes = currentDate.getMinutes();
-  // const seconds = currentDate.getSeconds();
-  //removed seconds :${seconds}
-  // const timeString = `${hours}:${minutes}`;
-  return hours;
 }
 
 function notify() {
