@@ -1,7 +1,7 @@
 const { toMatchImageSnapshot } = require("jest-image-snapshot");
 const puppeteer = require("puppeteer");
 require("dotenv").config();
-const { YORKPASSWORD } = process.env;
+const { YORKPASSWORD, YORKEMAIL } = process.env;
 
 expect.extend({ toMatchImageSnapshot });
 
@@ -22,7 +22,7 @@ describe("interview schedule", () => {
     await page.keyboard.press("Tab");
 
     // Fill in the login form
-    await page.keyboard.type("nafziger10@gmail.com");
+    await page.keyboard.type(YORKEMAIL);
     await page.keyboard.press("Tab");
     await page.keyboard.type(YORKPASSWORD);
 
@@ -44,8 +44,8 @@ describe("interview schedule", () => {
       checkHyphens();
       // Occasionally screenshots cause test to fail maybe 1 out of 20
       // so just check screenshots to make sure each page is accessed once a day.
-      // const screenshot = await page.screenshot();
-      // expect(screenshot).toMatchImageSnapshot();
+      const screenshot = await page.screenshot();
+      expect(screenshot).toMatchImageSnapshot();
       await new Promise((r) => setTimeout(r, 400));
 
       const elements = await page.$x('//*[contains(text(), "Next Week")]');
