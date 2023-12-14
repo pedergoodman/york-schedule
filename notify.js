@@ -8,15 +8,20 @@ const accountSid = "AC3c5e4259a6ce6bd8c5d05872494e6d8b";
 const authToken = TWAUTH;
 const client = require("twilio")(accountSid, authToken);
 
-// sendDesktopNotification();
+
+
+sendDesktopNotification();
 sendWAMessage();
+
 
 // Send Whatsapp Message
 async function sendWAMessage() {
+  //First Check the file to see if notification has already been sent
+  //AlreadyFound.txt should start as 'false'
   const filePath = path.join(__dirname, "alreadyFound.txt");
-  // Read the contents of the file asynchronously
-  // const alreadyFound = await isFound(filePath);
   let alreadyFound = true;
+
+  //read the file
   await fs.readFile(filePath, "utf8", (err, data) => {
     if (err) {
       console.error("Error reading file:", err);
@@ -25,19 +30,17 @@ async function sendWAMessage() {
     //make 'true' into a boolean
     alreadyFound = JSON.parse(data);
   });
+  //delay is needed to make sure alreadyFound gets assigned before checking in the if statement
   await delay(200);
-
-
-  console.log("already found:", alreadyFound);
   if (!alreadyFound) {
     console.log("SEND NOTIFICATION");
-    // client.messages
-    //   .create({
-    //     body: `NOICE, York has open time slots!`,
-    //     from: WAPHONE,
-    //     to: MYWA,
-    //   })
-    //   .then((message) => console.log(message.sid));
+    client.messages
+      .create({
+        body: `NOICE, York has open time slots!`,
+        from: WAPHONE,
+        to: MYWA,
+      })
+      .then((message) => console.log(message.sid));
     updateFoundStatus(filePath);
   } else {
     //this make sure you don't get a new Whatsapp message every minute
