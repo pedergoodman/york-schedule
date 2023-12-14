@@ -8,7 +8,7 @@ const path = require("path");
 // ctrl + c
 
 // Set interval to 1 minutes (600,000 milliseconds)
-const minutes = 5; //test every how many minutes
+const minutes = 1; //test every how many minutes
 const seconds = 60; //60 means every minute (make this less for testing)
 const interval = minutes * seconds * 1000;
 // Execute the function initially and then at regular intervals
