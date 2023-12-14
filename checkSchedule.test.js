@@ -16,7 +16,7 @@ describe("interview schedule", () => {
     // Navigate to the login page
     await page.goto("https://yorkdevtraining.com/recruiting/login");
 
-    await new Promise((r) => setTimeout(r, 500));
+    await new Promise((r) => setTimeout(r, 700));
     //navigate to username on York
     await page.keyboard.press("Tab");
     await page.keyboard.press("Tab");
@@ -33,7 +33,7 @@ describe("interview schedule", () => {
     //go to schedule
     await page.keyboard.press("Tab");
     await page.keyboard.press("Enter");
-    await new Promise((r) => setTimeout(r, 500));
+    await new Promise((r) => setTimeout(r, 800));
     page.setViewport({ width: 1100, height: 1500 });
 
     // await new Promise((r) => setTimeout(r, 1000));
@@ -46,11 +46,11 @@ describe("interview schedule", () => {
       // so just check screenshots to make sure each page is accessed once a day.
       // const screenshot = await page.screenshot();
       // expect(screenshot).toMatchImageSnapshot();
-      await new Promise((r) => setTimeout(r, 200));
+      await new Promise((r) => setTimeout(r, 400));
 
       const elements = await page.$x('//*[contains(text(), "Next Week")]');
       await elements[0].click();
-      await new Promise((r) => setTimeout(r, 200));
+      await new Promise((r) => setTimeout(r, 400));
     });
 
   async function checkHyphens() {
