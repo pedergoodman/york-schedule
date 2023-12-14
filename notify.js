@@ -8,33 +8,29 @@ const accountSid = "AC3c5e4259a6ce6bd8c5d05872494e6d8b";
 const authToken = TWAUTH;
 const client = require("twilio")(accountSid, authToken);
 
-
 // sendDesktopNotification();
 sendWAMessage();
 
 // Send Whatsapp Message
 async function sendWAMessage() {
-  const currentDate = new Date();
-  const hours = currentDate.getHours();
-
-  const filePath = path.join(__dirname, "hours.txt");
-  let foundResultAlready = null;
+  const filePath = path.join(__dirname, "alreadyFound.txt");
   // Read the contents of the file asynchronously
+  // const alreadyFound = await isFound(filePath);
+  let alreadyFound = true;
   await fs.readFile(filePath, "utf8", (err, data) => {
     if (err) {
       console.error("Error reading file:", err);
       return;
     }
-    // Display the contents of the file
-    console.log("File Contents:", data);
     //make 'true' into a boolean
     alreadyFound = JSON.parse(data);
   });
   await delay(200);
 
-  console.log(hours, prevHour);
-  if (!foundResultAlready) {
-    // console.log("NOT SAME");
+
+  console.log("already found:", alreadyFound);
+  if (!alreadyFound) {
+    console.log("SEND NOTIFICATION");
     // client.messages
     //   .create({
     //     body: `NOICE, York has open time slots!`,
@@ -42,27 +38,30 @@ async function sendWAMessage() {
     //     to: MYWA,
     //   })
     //   .then((message) => console.log(message.sid));
-    
-// Write to the file asynchronously
-fs.writeFile(filePath, 'true', 'utf8', (err) => {
-  if (err) {
-    console.error('Error writing to file:', err);
-    return;
-  }
-  console.log('File has been written successfully!');
-});
-
+    updateFoundStatus(filePath);
   } else {
     //this make sure you don't get a new Whatsapp message every minute
+    console.log("Notification has already been sent");
     return;
   }
+}
+
+function updateFoundStatus(filePath) {
+  // Write to the file asynchronously
+  fs.writeFile(filePath, "true", "utf8", (err) => {
+    if (err) {
+      console.error("Error writing to file:", err);
+      return;
+    }
+    // console.log("File has been written successfully!");
+  });
 }
 
 function delay(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
+  return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-function sendDesktopNotification(){
+function sendDesktopNotification() {
   notifier.notify(
     {
       title: "York!",
@@ -76,11 +75,11 @@ function sendDesktopNotification(){
       // Metadata contains activationType, activationAt, deliveredAt
     }
   );
-  
+
   notifier.on("click", function (notifierObject, options, event) {
     // Triggers if `wait: true` and user clicks notification
   });
-  
+
   notifier.on("timeout", function (notifierObject, options) {
     // Triggers if `wait: true` and notification closes
   });
