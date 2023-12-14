@@ -1,3 +1,4 @@
+// @ts-nocheck
 const { toMatchImageSnapshot } = require("jest-image-snapshot");
 const puppeteer = require("puppeteer");
 require("dotenv").config();

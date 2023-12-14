@@ -1,9 +1,11 @@
+// @ts-nocheck
 const notifier = require("node-notifier");
 const path = require("path");
 require("dotenv").config();
 const { TWAUTH, WAPHONE, MYWA } = process.env;
 const fs = require("fs");
 
+// ! replace this??
 const accountSid = "AC3c5e4259a6ce6bd8c5d05872494e6d8b";
 const authToken = TWAUTH;
 const client = require("twilio")(accountSid, authToken);
@@ -11,7 +13,7 @@ const client = require("twilio")(accountSid, authToken);
 
 
 sendDesktopNotification();
-sendWAMessage();
+// sendWAMessage();
 
 
 // Send Whatsapp Message
@@ -30,8 +32,10 @@ async function sendWAMessage() {
     //make 'true' into a boolean
     alreadyFound = JSON.parse(data);
   });
+  
   //delay is needed to make sure alreadyFound gets assigned before checking in the if statement
   await delay(200);
+
   if (!alreadyFound) {
     console.log("SEND NOTIFICATION");
     client.messages
