@@ -201,7 +201,6 @@
     "yocto-queue": "^0.1.0"
   },
   "scripts": {
-    "reset": "node reset.js",
     "start": "node runner.js",
     "test": "jest",
     "on-test-fail": "node notify.js"

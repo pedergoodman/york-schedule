@@ -55,3 +55,14 @@ function notify() {
     // console.log(`NOTIFY stdout: ${stdout}`);
   });
 }
+
+exec("node reset.js", (error, stdout, stderr) => {
+  if (error) {
+    console.error(`RESET Error: ${error.message}`);
+    return;
+  }
+  if (stderr) {
+    console.log("RESET stderr", stderr);
+    return;
+  };
+});
