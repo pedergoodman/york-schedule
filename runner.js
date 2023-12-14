@@ -1,4 +1,6 @@
 const { exec } = require("child_process");
+const fs = require("fs");
+const path = require("path");
 
 //to start
 //npm start
@@ -56,13 +58,11 @@ function notify() {
   });
 }
 
-exec("node reset.js", (error, stdout, stderr) => {
-  if (error) {
-    console.error(`RESET Error: ${error.message}`);
+const filePath = path.join(__dirname, "alreadyFound.txt");
+fs.writeFile(filePath, "false", "utf8", (err) => {
+  if (err) {
+    console.error("Error writing to file:", err);
     return;
   }
-  if (stderr) {
-    console.log("RESET stderr", stderr);
-    return;
-  };
+  // console.log("File has been written successfully!");
 });
