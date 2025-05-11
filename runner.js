@@ -44,7 +44,7 @@ function getTime() {
   return timeString;
 }
 
-function notify() {
+function notify(stderr) {
   // Run the 'npx jest' command
   exec("node notify.js", (error, stdout, stderr) => {
     if (error) {
